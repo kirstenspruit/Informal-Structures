@@ -1,0 +1,225 @@
+/* || FONTS */
+
+@font-face {
+  font-family: 'Editor';
+  src: url(fonts/Editor-Bold.otf);
+}
+
+@font-face {
+  font-family: 'Times Now';
+  src: url(fonts/Times-Now-Bold.otf);
+}
+
+@font-face {
+  font-family: 'Residence';
+  src: url(fonts/Residence241211-Medium.otf);
+  font-weight: bold;
+}
+
+:root {
+    --color-darkgrey: #5d5d5d;
+    --color-lightgrey: #f1f1f1;
+
+    --color-tx: var(--color-darkgrey);
+    --color-tx-highlighted: var(--color-darkgrey);
+    --color-tx-hover: #0000ff60;
+    --color-bg: var(--color-darkgrey);
+    --color-bg-light: var(--color-lightgrey);
+
+    --border: 1px solid var(--color-darkgrey);
+}
+
+
+/* || TYPOGRAPHY */
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Times Now', 'Times New Roman', Times, serif;
+    letter-spacing: 0.03em;
+    background-color: var(--color-bg);
+    margin: 0;
+    color: var(--color-tx);
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Residence';
+}
+h1,h2,h3,h4,h5,h6,p {
+    margin: 0;
+}
+
+.heading {
+    font-size: 3rem;
+}
+
+.POI {
+    font-family: 'Editor';
+    text-transform: uppercase;
+}
+
+/* || UTILITIES */
+
+.hidden {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.list-reset {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* || MEDIA */
+
+figure {
+    margin: 0;
+}
+
+img {
+    width: 100%;
+}
+
+.site-logo {
+    width: 200px;
+    max-width: 100%;
+    mix-blend-mode: difference;
+}
+
+/* || LAYOUT */
+
+.site {
+    margin: 0 1rem;
+}
+.header {
+    position: fixed;
+    top: 1rem;
+    z-index: 2;
+    /* margin: 1rem; */
+}
+
+.separate-media {
+    display: flex;
+    gap: 1rem;
+}
+.separate-media > * {
+    flex: 1;
+}
+
+/* =========================================
+   CHANNEL
+   ========================================= */
+
+.channel {
+    /* padding: 1rem; */
+    position: relative;
+}
+
+.channel__header {
+    position: fixed;
+    bottom: 1rem;
+    z-index: 2;
+}
+
+.channel__title {
+    font-weight: normal;
+    font-size: 1.5rem;
+    color: var(--color-lightgrey);
+}
+.channel__description {
+    color: var(--color-lightgrey);
+}
+
+.channel__blocks {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    position: relative;
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: Y mandatory;
+}
+
+
+/* =========================================
+   BLOCK (shared across all block types)
+   ========================================= */
+
+.block {
+    display: flex;
+    justify-content: end;
+    scroll-snap-align: start;
+    padding: 3rem 0;
+}
+
+.block__inner {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-bg-light);
+    padding: 0.5rem;
+    position: sticky;
+    top: 3rem;
+}
+
+.block__title {
+    /* text-align: center; */
+    margin-top: 0.25rem;
+    margin-bottom: 0;
+    font-size: 1rem;
+}
+
+.block__link {
+    color: var(--color-tx-highlighted);
+}
+.block__link:hover {
+    color: var(--color-tx-hover);
+}
+
+.block__description {
+}
+
+.block__content {
+}
+
+.block__image {
+    width: auto;
+    max-width: 100%;
+    max-height: 80vh;
+}
+
+.block__embed {
+}
+
+.block__caption {
+}
+
+
+/* =========================================
+   BLOCK MODIFIERS (per type)
+   ========================================= */
+
+.block--link {
+}
+
+.block--image {
+}
+
+.block--text {
+}
+
+.block--media {
+}
+
+.block--attachment {
+}
+
+.block--channel {
+}
