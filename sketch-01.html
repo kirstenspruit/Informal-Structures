@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Informal Structures</title>
+    <title>Informal Structures 01</title>
 </head>
 <style>
-/* || TYPOGRAPHY */
+    /* || TYPOGRAPHY */
 
 html {
     font-size: 16px;
@@ -209,20 +209,12 @@ img {
                 <img src="logos/logo-F1F1F1.png">
             </div>
         </header>
-        <main class="separate-media">
-            <div class="channel" id="channel">Channel</div>
-            <ul id="images" class="list-reset">Images</ul>
-            <ul id="texts" class="list-reset">Texts</ul>
-            <ul id="links" class="list-reset">Links</ul>
-            <ul id="media" class="list-reset">Media</ul>
-            <ul id="audio" class="list-reset">Audio</ul>
-            <ul id="channels" class="list-reset">Channels</ul>
-        </main>
+        <main class="channel" id="channel"></main>
     </div>
 </body>
 <script>
-// Note: channels/ {{channel-slug}} ?direction=...
-fetch('https://api.are.na/v2/channels/express-he8jz5c1ljw?direction=desc&per=100')
+    // Note: channels/ {{channel-slug}} ?direction=...
+fetch('https://api.are.na/v2/channels/site-specific-informal-structures?direction=desc&per=300')
 .then(r => r.json())
 .then(channel => {
 
@@ -263,15 +255,6 @@ function formatDate(dateStr) {
   const day = String(d.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 }
-
-const containers = {
-  Image: document.getElementById('images'),
-  Text: document.getElementById('texts'),
-  Link: document.getElementById('links'),
-  Media: document.getElementById('media'),
-  Attachment: document.getElementById('audio'),
-  Channel: document.getElementById('channels'),
-};
 
 (channel.contents || []).forEach(block => {
     const type = block.class.toLowerCase();
@@ -350,7 +333,7 @@ const containers = {
     `;
     }
 
-    (containers[block.class] || list).appendChild(li);
+    list.appendChild(li);
 });
 })
 .catch(err => {

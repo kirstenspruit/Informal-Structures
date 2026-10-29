@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Informal Structures 02</title>
+</head>
+<style>
+/* || TYPOGRAPHY */
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Times Now', 'Times New Roman', Times, serif;
+    /* letter-spacing: 0.03em; */
+    background-color: var(--color-bg);
+    margin: 0;
+    color: var(--color-tx);
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Residence';
+}
+h1,h2,h3,h4,h5,h6,p {
+    margin: 0;
+}
+
+.heading {
+    font-size: 3rem;
+}
+
+.POI {
+    font-family: 'Editor';
+    text-transform: uppercase;
+}
+
+/* || UTILITIES */
+
+.hidden {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.list-reset {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* || MEDIA */
+
+figure {
+    margin: 0;
+}
+
+img {
+    width: 100%;
+}
+
+.site-logo {
+    width: 200px;
+    max-width: 100%;
+    mix-blend-mode: difference;
+}
+
+/* || LAYOUT */
+
+.site {
+    margin: 0 1rem;
+}
+.header {
+    position: fixed;
+    top: 1rem;
+    z-index: 2;
+    /* margin: 1rem; */
+}
+
+.separate-media {
+    display: flex;
+    gap: 1rem;
+}
+.separate-media > * {
+    flex: 1;
+}
+
+/* =========================================
+   CHANNEL
+   ========================================= */
+
+.channel {
+    /* padding: 1rem; */
+    position: relative;
+}
+
+.channel__header {
+    position: fixed;
+    bottom: 1rem;
+    z-index: 2;
+}
+
+.channel__title {
+    font-weight: normal;
+    font-size: 1.5rem;
+    color: var(--color-lightgrey);
+}
+.channel__description {
+    color: var(--color-lightgrey);
+}
+
+.channel__blocks {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    position: relative;
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: Y mandatory;
+}
+
+
+/* =========================================
+   BLOCK (shared across all block types)
+   ========================================= */
+
+.block {
+    display: flex;
+    justify-content: end;
+    scroll-snap-align: start;
+    padding: 3rem 0;
+}
+
+.block__inner {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-bg-light);
+    padding: 0.5rem;
+    position: sticky;
+    top: 3rem;
+}
+
+.block__title {
+    /* text-align: center; */
+    margin-top: 0.25rem;
+    margin-bottom: 0;
+    font-size: 1rem;
+}
+
+.block__link {
+    color: var(--color-tx-highlighted);
+}
+.block__link:hover {
+    color: var(--color-tx-hover);
+}
+
+.block__description {
+}
+
+.block__content {
+}
+
+.block__image {
+    width: auto;
+    max-width: 100%;
+    max-height: 80vh;
+}
+
+.block__embed {
+}
+
+.block__caption {
+}
+
+
+/* =========================================
+   BLOCK MODIFIERS (per type)
+   ========================================= */
+
+.block--link {
+}
+
+.block--image {
+}
+
+.block--text {
+}
+
+.block--media {
+}
+
+.block--attachment {
+}
+
+.block--channel {
+}
+</style>
+<body>
+    <div class="site">
+        <header class="header">
+            <h1 class="hidden">Informal Structures</h1>
+            <div class="site-logo">
+                <img src="logos/logo-F1F1F1.png">
+            </div>
+        </header>
+        <main class="separate-media">
+            <div class="channel" id="channel">Channel</div>
+            <ul id="images" class="list-reset">Images</ul>
+            <ul id="texts" class="list-reset">Texts</ul>
+            <ul id="links" class="list-reset">Links</ul>
+            <ul id="media" class="list-reset">Media</ul>
+            <ul id="audio" class="list-reset">Audio</ul>
+            <ul id="channels" class="list-reset">Channels</ul>
+        </main>
+    </div>
+</body>
+<script>
+// Note: channels/ {{channel-slug}} ?direction=...
+fetch('https://api.are.na/v2/channels/express-he8jz5c1ljw?direction=desc&per=100')
+.then(r => r.json())
+.then(channel => {
+
+const main = document.getElementById('channel');
+const description = channel.metadata?.description;
+
+main.innerHTML = `
+    <header class="channel__header">
+        <h1 class="channel__title"></h1>
+        ${description ? `<div class="channel__description"></div>` : ''}
+    </header>
+    <ul class="list-reset channel__blocks"></ul>
+`;
+
+main.querySelector('.channel__title').textContent = channel.title;
+if (description) {
+main.querySelector('.channel__description').textContent = description;
+}
+
+const list = main.querySelector('.channel__blocks');
+
+function blockMeta(block) {
+const creator = block.user?.full_name || block.user?.username;
+const connector = block.connected_by_username;
+const date = formatDate(block.connected_at);
+
+const byline = (creator && connector && creator !== connector)
+    ? `${connector} (added block by ${creator})`
+    : (connector || creator || 'Unknown');
+
+return `<p class="block__meta">${byline} · ${date}</p>`;
+}
+
+function formatDate(dateStr) {
+  const d = new Date(dateStr);
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+const containers = {
+  Image: document.getElementById('images'),
+  Text: document.getElementById('texts'),
+  Link: document.getElementById('links'),
+  Media: document.getElementById('media'),
+  Attachment: document.getElementById('audio'),
+  Channel: document.getElementById('channels'),
+};
+
+(channel.contents || []).forEach(block => {
+    const type = block.class.toLowerCase();
+    const li = document.createElement('li');
+    li.className = `block block--${type}`;
+
+    if (block.class === 'Link') {
+    li.innerHTML = `
+        <article class="block__inner">
+        <h2 class="block__title">
+            <a class="block__link link-arrow" href="${block.source?.url || '#'}">${block.title || block.source?.url}</a>
+        </h2>
+        ${block.description ? `<p class="block__description">${block.description}</p>` : ''}
+        <div class="block__meta POI">${blockMeta(block)}</div>
+        </article>
+    `;
+    } else if (block.class === 'Image') {
+    li.innerHTML = `
+        <figure class="block__inner">
+        <img class="block__image" src="${block.image?.display?.url}" alt="${block.title || ''}">
+        ${block.title || block.content_html ? `
+            <figcaption class="block__caption">
+            ${block.title ? `<h2 class="block__title">${block.title}</h2>` : ''}
+            </figcaption>` : ''}
+        <div class="block__meta POI">${blockMeta(block)}</div>
+        </figure>
+    `;
+    } else if (block.class === 'Text') {
+    li.innerHTML = `
+        <article class="block__inner">
+        ${block.title ? `<h2 class="block__title">${block.title}</h2>` : ''}
+        <div class="block__content">${block.content_html || ''}</div>
+        <div class="block__meta POI">${blockMeta(block)}</div>
+        </article>
+    `;
+    } else if (block.class === 'Media') {
+    li.innerHTML = `
+        <figure class="block__inner">
+        ${block.title ? `<h2 class="block__title">${block.title}</h2>` : ''}
+        <div class="block__embed">${block.embed?.html || ''}</div>
+        ${block.content_html ? `<figcaption class="block__caption"><div class="block__content">${block.content_html}</div></figcaption>` : ''}
+        <div class="block__meta POI">${blockMeta(block)}</div>
+        </figure>
+    `;
+    } else if (block.class === 'Attachment') {
+    const file = block.attachment || {};
+    const fileUrl = file.url || '';
+    const mime = file.content_type || '';
+    const isAudio = mime.startsWith('audio/');
+    const title = block.title || file.file_name || 'Untitled';
+
+    li.innerHTML = `
+        <figure class="block__inner">
+        ${block.image?.display?.url ? `<img class="block__image" src="${block.image.display.url}" alt="${title}">` : ''}
+        ${isAudio ? `
+            <audio controls preload="none">
+            <source src="${fileUrl}" type="${mime}">
+            Your browser does not support the audio element.
+            </audio>` : ''}
+        <figcaption class="block__caption">
+            <h2 class="block__title">
+            <a class="block__link" href="${fileUrl || '#'}">${title}</a>
+            </h2>
+        </figcaption>
+        <div class="block__meta POI">${blockMeta(block)}</div>
+        </figure>
+    `;
+    } else if (block.class === 'Channel') {
+    li.innerHTML = `
+        <article class="block__inner">
+        <h2 class="block__title">
+            <a class="block__link" href="https://www.are.na/channel/${block.slug}">${block.title}</a>
+        </h2>
+        <div class="block__meta POI">${blockMeta(block)}</div>
+        </article>
+    `;
+    }
+
+    (containers[block.class] || list).appendChild(li);
+});
+})
+.catch(err => {
+document.getElementById('channel').textContent = 'Failed to load channel.';
+console.error(err);
+});
+</script>
+</html>

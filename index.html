@@ -4,22 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Informal Structures</title>
+    <title>Informal Structures 03</title>
 </head>
 <style>
-    /* || TYPOGRAPHY */
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* || TYPOGRAPHY */
 
 html {
-    font-size: 16px;
+    font-size: 20px;
     scroll-behavior: smooth;
 }
 
 body {
     font-family: 'Times Now', 'Times New Roman', Times, serif;
-    /* letter-spacing: 0.03em; */
-    background-color: var(--color-bg);
+    letter-spacing: 0.03em;
     margin: 0;
-    color: var(--color-tx);
+    color: var(--color-darkgrey);
+    background-color: var(--color-lightgrey);
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -36,6 +48,7 @@ h1,h2,h3,h4,h5,h6,p {
 .POI {
     font-family: 'Editor';
     text-transform: uppercase;
+    font-size: 0.8rem;
 }
 
 /* || UTILITIES */
@@ -63,31 +76,45 @@ figure {
 img {
     width: 100%;
 }
+video {
+    /* max-width: 100%; */
+    /* height: auto; */
+}
 
 .site-logo {
-    width: 200px;
-    max-width: 100%;
-    mix-blend-mode: difference;
+  width: 200px;
+  max-width: 100%;
 }
 
 /* || LAYOUT */
 
 .site {
-    margin: 0 1rem;
-}
-.header {
-    position: fixed;
-    top: 1rem;
-    z-index: 2;
-    /* margin: 1rem; */
+    /* margin: 0 1rem; */
 }
 
-.separate-media {
-    display: flex;
-    gap: 1rem;
+.cover {
+  background-color: var(--color-darkgrey);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
 }
-.separate-media > * {
-    flex: 1;
+.cover img {
+  object-fit: contain;
+}
+.header {
+  position: sticky;
+  padding: 1rem;
+  top: 0;
+  z-index: 2;
+  /* mix-blend-mode: exclusion; */
+}
+
+.info-section {
+    padding: 1rem;
+    margin: 4rem 0;   
+}
+.info-section p {
+  max-width: 40em;
 }
 
 /* =========================================
@@ -95,69 +122,125 @@ img {
    ========================================= */
 
 .channel {
-    /* padding: 1rem; */
-    position: relative;
+
 }
 
 .channel__header {
-    position: fixed;
+    /* position: fixed;
     bottom: 1rem;
-    z-index: 2;
+    z-index: 2; */
+    /* display: none; */
+    padding: 1rem;
+    border-top: 3px dotted var(--color-darkgrey);
 }
 
 .channel__title {
-    font-weight: normal;
-    font-size: 1.5rem;
-    color: var(--color-lightgrey);
+
 }
 .channel__description {
-    color: var(--color-lightgrey);
+
 }
 
 .channel__blocks {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 5rem;
-    position: relative;
-    height: 100vh;
-    overflow-y: scroll;
-    scroll-snap-type: Y mandatory;
+
 }
 
+#images {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  width: 100vw;
+  gap: 2rem;
+  padding: 1rem;
+}
 
+#images .block {
+  white-space: nowrap;
+  width: 500px;
+}
+#images figure {
+  width: 500px;
+  aspect-ratio: 1 / 1;
+}
+#images img {
+  border: 3px dotted var(--color-darkgrey);
+}
+#videos {
+    /* position: absolute;
+    top: 0;
+    left: 0; */
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+}
+#videos .block {
+    white-space: nowrap;
+    /* width: 500px; */
+    height: 100%;
+}
+
+#videos video {
+  display: block;
+  height: 100vh;
+  border-right: 3px dotted var(--color-darkgrey);
+}
+
+#videos .block__meta {
+  display: none;
+}
+.videos__frame {
+  position: absolute;
+  display: flex;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  width: auto;
+  pointer-events: none;
+  /* display: none; */
+}
+.videos__frame img {
+  width: 100vw;
+  height: 100vh;
+}
+
+#videos .block__title,
+#images .block__title{
+  display: none;
+}
+
+#texts,
+#links {
+  padding: 1rem;
+}
+#links {
+  display: none;
+}
 /* =========================================
    BLOCK (shared across all block types)
    ========================================= */
 
 .block {
-    display: flex;
-    justify-content: end;
-    scroll-snap-align: start;
-    padding: 3rem 0;
+
 }
 
 .block__inner {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--color-bg-light);
-    padding: 0.5rem;
-    position: sticky;
-    top: 3rem;
+
 }
 
 .block__title {
-    /* text-align: center; */
-    margin-top: 0.25rem;
-    margin-bottom: 0;
-    font-size: 1rem;
+  /* display: none;   */
+}
+.block__meta {
+  /* display: none; */
 }
 
 .block__link {
-    color: var(--color-tx-highlighted);
+
 }
 .block__link:hover {
-    color: var(--color-tx-hover);
+
 }
 
 .block__description {
@@ -167,9 +250,7 @@ img {
 }
 
 .block__image {
-    width: auto;
-    max-width: 100%;
-    max-height: 80vh;
+
 }
 
 .block__embed {
@@ -203,142 +284,217 @@ img {
 </style>
 <body>
     <div class="site">
+        <div class="cover">
+          <img src="cover_06.png">
+        </div>
         <header class="header">
             <h1 class="hidden">Informal Structures</h1>
             <div class="site-logo">
-                <img src="logos/logo-F1F1F1.png">
+                <img src="logos/logo-5D5D5D.png">
             </div>
         </header>
-        <main class="channel" id="channel"></main>
+        <main>
+            <section class="info-section">
+              <h2>Section header</h2>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque at justo augue. Nam a auctor sem. Praesent aliquet magna nulla, sit amet condimentum felis faucibus vitae. Fusce velit tortor, placerat in nisl ac, ullamcorper aliquam turpis. Praesent placerat odio turpis, id finibus augue egestas vel. Nam eget eleifend ligula. Maecenas orci sem, tristique quis nisl quis, bibendum accumsan enim. Sed mattis orci eu urna molestie viverra. Nulla quis ipsum sagittis est tempus convallis. Maecenas venenatis pretium lobortis. Duis porta porttitor libero, vitae mollis orci. Sed pharetra ultrices risus, ac cursus sem. Quisque aliquam et ipsum vitae interdum. In venenatis tortor vel turpis cursus, in iaculis libero vulputate. Praesent non feugiat ipsum. 
+              </p>
+            </section>
+            <section class="info-section">
+              <h2>Section header</h2>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque at justo augue. Nam a auctor sem. Praesent aliquet magna nulla, sit amet condimentum felis faucibus vitae. Fusce velit tortor, placerat in nisl ac, ullamcorper aliquam turpis. Praesent placerat odio turpis, id finibus augue egestas vel. Nam eget eleifend ligula. Maecenas orci sem, tristique quis nisl quis, bibendum accumsan enim. Sed mattis orci eu urna molestie viverra. Nulla quis ipsum sagittis est tempus convallis. Maecenas venenatis pretium lobortis. Duis porta porttitor libero, vitae mollis orci. Sed pharetra ultrices risus, ac cursus sem. Quisque aliquam et ipsum vitae interdum. In venenatis tortor vel turpis cursus, in iaculis libero vulputate. Praesent non feugiat ipsum. 
+              </p>
+            </section>
+            <div class="channel" id="channel"></div>
+              <ul id="images" class="list-reset block-type-list"></ul>
+              <ul id="texts" class="list-reset block-type-list"></ul>
+              <ul id="links" class="list-reset block-type-list"></ul>
+              <ul id="media" class="list-reset block-type-list"></ul>
+              <ul id="audio" class="list-reset block-type-list"></ul>
+              <ul id="videos" class="list-reset block-type-list">
+                <div class="videos__frame">
+                  <img src="space-frame.png">
+                </div>
+              </ul>
+              <ul id="files" class="list-reset block-type-list"></ul>
+              <ul id="channels" class="list-reset block-type-list"></ul>
+        </main>
     </div>
 </body>
 <script>
-    // Note: channels/ {{channel-slug}} ?direction=...
-fetch('https://api.are.na/v2/channels/express-he8jz5c1ljw?direction=desc&per=100')
-.then(r => r.json())
-.then(channel => {
+// Note: channels/ {{channel-slug}} ?direction=...
+async function fetchChannel(slug, per = 100) {
+  const base = `https://api.are.na/v2/channels/${slug}`;
+  const query = `direction=desc&per=${per}`;
 
-const main = document.getElementById('channel');
-const description = channel.metadata?.description;
+  const first = await fetch(`${base}?${query}&page=1`).then(r => r.json());
+  const pages = Math.ceil((first.length || 0) / per);
 
-main.innerHTML = `
-    <header class="channel__header">
-        <h1 class="channel__title"></h1>
+  const rest = await Promise.all(
+    Array.from({ length: Math.max(0, pages - 1) }, (_, i) =>
+      fetch(`${base}?${query}&page=${i + 2}`).then(r => r.json())
+    )
+  );
+
+  first.contents = [first.contents, ...rest.map(p => p.contents)].flat();
+  return first;
+}
+
+fetchChannel('express-he8jz5c1ljw')
+  .then(channel => {
+
+    const main = document.getElementById('channel');
+    const description = channel.metadata?.description;
+
+    main.innerHTML = `
+      <header class="channel__header">
+        <h2 class="channel__title"></h2>
         ${description ? `<div class="channel__description"></div>` : ''}
-    </header>
-    <ul class="list-reset channel__blocks"></ul>
-`;
-
-main.querySelector('.channel__title').textContent = channel.title;
-if (description) {
-main.querySelector('.channel__description').textContent = description;
-}
-
-const list = main.querySelector('.channel__blocks');
-
-function blockMeta(block) {
-const creator = block.user?.full_name || block.user?.username;
-const connector = block.connected_by_username;
-const date = formatDate(block.connected_at);
-
-const byline = (creator && connector && creator !== connector)
-    ? `${connector} (added block by ${creator})`
-    : (connector || creator || 'Unknown');
-
-return `<p class="block__meta">${byline} · ${date}</p>`;
-}
-
-function formatDate(dateStr) {
-  const d = new Date(dateStr);
-  const year = d.getFullYear();
-  const month = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-}
-
-(channel.contents || []).forEach(block => {
-    const type = block.class.toLowerCase();
-    const li = document.createElement('li');
-    li.className = `block block--${type}`;
-
-    if (block.class === 'Link') {
-    li.innerHTML = `
-        <article class="block__inner">
-        <h2 class="block__title">
-            <a class="block__link link-arrow" href="${block.source?.url || '#'}">${block.title || block.source?.url}</a>
-        </h2>
-        ${block.description ? `<p class="block__description">${block.description}</p>` : ''}
-        <div class="block__meta POI">${blockMeta(block)}</div>
-        </article>
+      </header>
+      <ul class="list-reset channel__blocks"></ul>
     `;
-    } else if (block.class === 'Image') {
-    li.innerHTML = `
-        <figure class="block__inner">
-        <img class="block__image" src="${block.image?.display?.url}" alt="${block.title || ''}">
-        ${block.title || block.content_html ? `
-            <figcaption class="block__caption">
-            ${block.title ? `<h2 class="block__title">${block.title}</h2>` : ''}
-            </figcaption>` : ''}
-        <div class="block__meta POI">${blockMeta(block)}</div>
-        </figure>
-    `;
-    } else if (block.class === 'Text') {
-    li.innerHTML = `
-        <article class="block__inner">
-        ${block.title ? `<h2 class="block__title">${block.title}</h2>` : ''}
-        <div class="block__content">${block.content_html || ''}</div>
-        <div class="block__meta POI">${blockMeta(block)}</div>
-        </article>
-    `;
-    } else if (block.class === 'Media') {
-    li.innerHTML = `
-        <figure class="block__inner">
-        ${block.title ? `<h2 class="block__title">${block.title}</h2>` : ''}
-        <div class="block__embed">${block.embed?.html || ''}</div>
-        ${block.content_html ? `<figcaption class="block__caption"><div class="block__content">${block.content_html}</div></figcaption>` : ''}
-        <div class="block__meta POI">${blockMeta(block)}</div>
-        </figure>
-    `;
-    } else if (block.class === 'Attachment') {
-    const file = block.attachment || {};
-    const fileUrl = file.url || '';
-    const mime = file.content_type || '';
-    const isAudio = mime.startsWith('audio/');
-    const title = block.title || file.file_name || 'Untitled';
 
-    li.innerHTML = `
-        <figure class="block__inner">
-        ${block.image?.display?.url ? `<img class="block__image" src="${block.image.display.url}" alt="${title}">` : ''}
-        ${isAudio ? `
-            <audio controls preload="none">
-            <source src="${fileUrl}" type="${mime}">
-            Your browser does not support the audio element.
-            </audio>` : ''}
-        <figcaption class="block__caption">
-            <h2 class="block__title">
-            <a class="block__link" href="${fileUrl || '#'}">${title}</a>
-            </h2>
-        </figcaption>
-        <div class="block__meta POI">${blockMeta(block)}</div>
-        </figure>
-    `;
-    } else if (block.class === 'Channel') {
-    li.innerHTML = `
-        <article class="block__inner">
-        <h2 class="block__title">
-            <a class="block__link" href="https://www.are.na/channel/${block.slug}">${block.title}</a>
-        </h2>
-        <div class="block__meta POI">${blockMeta(block)}</div>
-        </article>
-    `;
+    main.querySelector('.channel__title').textContent = channel.title;
+    if (description) {
+      main.querySelector('.channel__description').textContent = description;
     }
 
-    list.appendChild(li);
-});
-})
-.catch(err => {
-document.getElementById('channel').textContent = 'Failed to load channel.';
-console.error(err);
-});
+    const list = main.querySelector('.channel__blocks');
+
+    function blockMeta(block) {
+      const creator = block.user?.full_name || block.user?.username;
+      const connector = block.connected_by_username;
+      const date = formatDate(block.connected_at);
+
+      const byline = (creator && connector && creator !== connector)
+        ? `${connector} (added block by ${creator})`
+        : (connector || creator || 'Unknown');
+
+      return `<p class="block__meta">${byline} · ${date}</p>`;
+    }
+
+    function formatDate(dateStr) {
+      const d = new Date(dateStr);
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    const containers = {
+      Image: document.getElementById('images'),
+      Text: document.getElementById('texts'),
+      Link: document.getElementById('links'),
+      Media: document.getElementById('media'),
+      Attachment: document.getElementById('files'),
+      Audio: document.getElementById('audio'),
+      Video: document.getElementById('videos'),
+      Channel: document.getElementById('channels'),
+    };
+
+    (channel.contents || []).forEach(block => {
+      const type = block.class.toLowerCase();
+      const li = document.createElement('li');
+      li.className = `block block--${type}`;
+
+      // Decides which container this block goes to
+      let key = block.class;
+
+      if (block.class === 'Link') {
+        li.innerHTML = `
+          <article class="block__inner">
+            <h2 class="block__title">
+              <a class="block__link link-arrow" href="${block.source?.url || '#'}">${block.title || block.source?.url}</a>
+            </h2>
+            ${block.description ? `<p class="block__description">${block.description}</p>` : ''}
+            <div class="block__meta POI">${blockMeta(block)}</div>
+          </article>
+        `;
+
+      } else if (block.class === 'Image') {
+        li.innerHTML = `
+          <figure class="block__inner">
+            <img class="block__image" src="${block.image?.display?.url}" alt="${block.title || ''}">
+            ${block.title || block.content_html ? `
+              <figcaption class="block__caption">
+                ${block.title ? `<h2 class="block__title">${block.title}</h2>` : ''}
+              </figcaption>` : ''}
+            <div class="block__meta POI">${blockMeta(block)}</div>
+          </figure>
+        `;
+
+      } else if (block.class === 'Text') {
+        li.innerHTML = `
+          <article class="block__inner">
+            ${block.title ? `<h2 class="block__title">${block.title}</h2>` : ''}
+            <div class="block__content">${block.content_html || ''}</div>
+            <div class="block__meta POI">${blockMeta(block)}</div>
+          </article>
+        `;
+
+      } else if (block.class === 'Media') {
+        li.innerHTML = `
+          <figure class="block__inner">
+            ${block.title ? `<h2 class="block__title">${block.title}</h2>` : ''}
+            <div class="block__embed">${block.embed?.html || ''}</div>
+            ${block.content_html ? `<figcaption class="block__caption"><div class="block__content">${block.content_html}</div></figcaption>` : ''}
+            <div class="block__meta POI">${blockMeta(block)}</div>
+          </figure>
+        `;
+
+      } else if (block.class === 'Attachment') {
+        const file = block.attachment || {};
+        const fileUrl = file.url || '';
+        const mime = file.content_type || '';
+        const isAudio = mime.startsWith('audio/');
+        const isVideo = mime.startsWith('video/');
+        const thumb = block.image?.display?.url;
+        const title = block.title || file.file_name || 'Untitled';
+
+        // Only set the key here; the append happens once, at the end
+        key = isVideo ? 'Video' : isAudio ? 'Audio' : 'Attachment';
+
+        li.innerHTML = `
+          <figure class="block__inner">
+            ${isVideo ? `
+              <video autoplay muted loop preload="metadata" ${thumb ? `poster="${thumb}"` : ''} class="block__video">
+                <source src="${fileUrl}" type="${mime}">
+                Your browser does not support the video element.
+              </video>` : ''}
+            ${isAudio ? `
+              <audio controls preload="none">
+                <source src="${fileUrl}" type="${mime}">
+                Your browser does not support the audio element.
+              </audio>` : ''}
+            ${!isVideo && thumb ? `<img class="block__image" src="${thumb}" alt="${title}">` : ''}
+            <figcaption class="block__caption">
+              <h2 class="block__title">
+                <a class="block__link" href="${fileUrl || '#'}">${title}</a>
+              </h2>
+            </figcaption>
+            <div class="block__meta POI">${blockMeta(block)}</div>
+          </figure>
+        `;
+
+      } else if (block.class === 'Channel') {
+        li.innerHTML = `
+          <article class="block__inner">
+            <h2 class="block__title">
+              <a class="block__link" href="https://www.are.na/channel/${block.slug}">${block.title}</a>
+            </h2>
+            <div class="block__meta POI">${blockMeta(block)}</div>
+          </article>
+        `;
+      }
+
+      // The only place a block gets appended
+      (containers[key] || list).appendChild(li);
+    });
+  })
+  .catch(err => {
+    document.getElementById('channel').textContent = 'Failed to load channel.';
+    console.error(err);
+  });
 </script>
 </html>
