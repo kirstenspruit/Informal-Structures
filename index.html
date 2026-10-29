@@ -107,6 +107,8 @@ video {
   top: 0;
   z-index: 2;
   /* mix-blend-mode: exclusion; */
+  border-top: var(--border-squares);
+  border-image: var(--border-image);
 }
 
 .info-section {
@@ -115,6 +117,24 @@ video {
 }
 .info-section p {
   max-width: 40em;
+}
+
+.info-section ul li::before {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1rem;
+    content: url(squares-s.svg);
+}
+.info-section ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.divider {
+  background-image: url(squares_2.svg);
+  background-repeat: repeat;
+  background-size: 18px;
+  height: 120px;
 }
 
 /* =========================================
@@ -131,7 +151,9 @@ video {
     z-index: 2; */
     /* display: none; */
     padding: 1rem;
-    border-top: 3px dotted var(--color-darkgrey);
+    /* border-top: 3px dotted var(--color-darkgrey); */
+    border-top: var(--border-squares);
+    border-image: var(--border-image);
 }
 
 .channel__title {
@@ -163,7 +185,9 @@ video {
   aspect-ratio: 1 / 1;
 }
 #images img {
-  border: 3px dotted var(--color-darkgrey);
+  /* border: 3px dotted var(--color-darkgrey); */
+  border: var(--border-squares);
+  border-image: var(--border-image);
 }
 #videos {
     /* position: absolute;
@@ -185,7 +209,9 @@ video {
 #videos video {
   display: block;
   height: 100vh;
-  border-right: 3px dotted var(--color-lightgrey);
+  /* border-right: 3px dotted var(--color-lightgrey); */
+  border-right: var(--border-squares);
+  border-image: var(--border-image);
 }
 
 #videos .block__meta {
@@ -300,19 +326,32 @@ video {
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque at justo augue. Nam a auctor sem. Praesent aliquet magna nulla, sit amet condimentum felis faucibus vitae. Fusce velit tortor, placerat in nisl ac, ullamcorper aliquam turpis. Praesent placerat odio turpis, id finibus augue egestas vel. Nam eget eleifend ligula. Maecenas orci sem, tristique quis nisl quis, bibendum accumsan enim. Sed mattis orci eu urna molestie viverra. Nulla quis ipsum sagittis est tempus convallis. Maecenas venenatis pretium lobortis. Duis porta porttitor libero, vitae mollis orci. Sed pharetra ultrices risus, ac cursus sem. Quisque aliquam et ipsum vitae interdum. In venenatis tortor vel turpis cursus, in iaculis libero vulputate. Praesent non feugiat ipsum. 
               </p>
+              <ul>
+                <li>Something</li>
+                <li>Something</li>
+                <li>Something</li>
+              </ul>
+              <ul></ul>
             </section>
+            <div class="divider"></div>
             <section class="info-section">
               <h2>Section header</h2>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque at justo augue. Nam a auctor sem. Praesent aliquet magna nulla, sit amet condimentum felis faucibus vitae. Fusce velit tortor, placerat in nisl ac, ullamcorper aliquam turpis. Praesent placerat odio turpis, id finibus augue egestas vel. Nam eget eleifend ligula. Maecenas orci sem, tristique quis nisl quis, bibendum accumsan enim. Sed mattis orci eu urna molestie viverra. Nulla quis ipsum sagittis est tempus convallis. Maecenas venenatis pretium lobortis. Duis porta porttitor libero, vitae mollis orci. Sed pharetra ultrices risus, ac cursus sem. Quisque aliquam et ipsum vitae interdum. In venenatis tortor vel turpis cursus, in iaculis libero vulputate. Praesent non feugiat ipsum. 
               </p>
             </section>
+            <div class="divider"></div>
             <div class="channel" id="channel"></div>
               <ul id="images" class="list-reset block-type-list"></ul>
+              <div class="divider"></div>
               <ul id="texts" class="list-reset block-type-list"></ul>
+              <div class="divider"></div>
               <ul id="links" class="list-reset block-type-list"></ul>
+              <div class="divider"></div>
               <ul id="media" class="list-reset block-type-list"></ul>
+              <div class="divider"></div>
               <ul id="audio" class="list-reset block-type-list"></ul>
+              <div class="divider"></div>
               <ul id="videos" class="list-reset block-type-list">
                 <div class="videos__frame">
                   <img src="space-frame.png">

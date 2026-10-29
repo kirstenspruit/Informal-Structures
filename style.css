@@ -27,5 +27,8 @@
     --color-bg-light: var(--color-lightgrey);
 
     --border: 1px solid var(--color-darkgrey);
+
+    --border-squares: 6px solid transparent;
+    --border-image: url(squares_2.svg) 24 round;
 }
 

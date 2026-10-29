@@ -1,0 +1,35 @@
+<svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="24" height="24" fill="#F1F1F1"/>
+<rect width="12" height="12" fill="#5D5D5D"/>
+<rect x="12" y="12" width="12" height="12" fill="#5D5D5D"/>
+<rect width="24" height="24" transform="translate(0 24)" fill="#F1F1F1"/>
+<rect y="24" width="12" height="12" fill="#5D5D5D"/>
+<rect x="12" y="36" width="12" height="12" fill="#5D5D5D"/>
+<rect width="24" height="24" transform="translate(0 48)" fill="#F1F1F1"/>
+<rect y="48" width="12" height="12" fill="#5D5D5D"/>
+<rect x="12" y="60" width="12" height="12" fill="#5D5D5D"/>
+<rect width="24" height="24" transform="translate(24 24)" fill="#F1F1F1"/>
+<rect x="24" y="24" width="12" height="12" fill="#5D5D5D"/>
+<rect x="36" y="36" width="12" height="12" fill="#5D5D5D"/>
+<rect width="24" height="24" transform="translate(24 48)" fill="#F1F1F1"/>
+<rect x="24" y="48" width="12" height="12" fill="#5D5D5D"/>
+<rect x="36" y="60" width="12" height="12" fill="#5D5D5D"/>
+<rect width="24" height="24" transform="translate(48 24)" fill="#F1F1F1"/>
+<rect x="48" y="24" width="12" height="12" fill="#5D5D5D"/>
+<rect x="60" y="36" width="12" height="12" fill="#5D5D5D"/>
+<rect width="24" height="24" transform="translate(48 48)" fill="#F1F1F1"/>
+<rect x="48" y="48" width="12" height="12" fill="#5D5D5D"/>
+<rect x="60" y="60" width="12" height="12" fill="#5D5D5D"/>
+<rect width="24" height="24" transform="translate(24)" fill="#F1F1F1"/>
+<rect x="24" width="12" height="12" fill="#5D5D5D"/>
+<rect x="36" y="12" width="12" height="12" fill="#5D5D5D"/>
+<rect width="24" height="24" transform="translate(48)" fill="#F1F1F1"/>
+<rect x="48" width="12" height="12" fill="#5D5D5D"/>
+<rect x="60" y="12" width="12" height="12" fill="#5D5D5D"/>
+<rect width="24" height="24" transform="translate(24 48)" fill="#F1F1F1"/>
+<rect x="24" y="48" width="12" height="12" fill="#5D5D5D"/>
+<rect x="36" y="60" width="12" height="12" fill="#5D5D5D"/>
+<rect width="24" height="24" transform="translate(48 48)" fill="#F1F1F1"/>
+<rect x="48" y="48" width="12" height="12" fill="#5D5D5D"/>
+<rect x="60" y="60" width="12" height="12" fill="#5D5D5D"/>
+</svg>
