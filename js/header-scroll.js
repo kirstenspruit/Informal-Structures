@@ -16,7 +16,7 @@ function onScroll() {
     }
 
     // header blend
-    if (currentPixels > 1000) {
+    if (currentPixels > 300) {
         header.classList.add("header--blend");
     } 
     else {

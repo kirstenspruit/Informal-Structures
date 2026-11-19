@@ -66,6 +66,35 @@
 }
 /* --- */
 
+/* EXPRESS-VIDEO */
+
+#express-videos {
+  height: calc(100vh - 12px);
+  width: 100vw;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  border: var(--border-squares);
+  border-image: var(--border-image);
+}
+#express-videos .block {
+    white-space: nowrap;
+    height: 100%;
+    background-color: var(--color-darkgrey);
+}
+
+#express-videos video {
+  display: block;
+  height: calc(100vh - 12px);
+  border-right: var(--border-squares);
+  border-image: var(--border-image);
+}
+
+#express-videos .block__title,
+#express-videos .block__meta {
+  display: none;
+}
+
 
 /* LIBRARY */
 
