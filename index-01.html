@@ -97,26 +97,55 @@ video {
   object-fit: contain;
 }
 
-
 .info-section {
-    padding: 1rem;
-    margin: 4rem 0;   
-}
-.info-section p {
-  max-width: 40em;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding: 1rem;
 }
 
-.info-section ul li::before {
-    display: inline-block;
-    width: 1.5rem;
-    height: 1rem;
-    content: url(squares-s.svg);
-}
-.info-section ul {
-    list-style: none;
-    padding-left: 0;
+
+.about-headers {
+  display: flex;
+  gap: 1.5rem;
+  border: var(--border-squares); border-image: var(--border-image);
+  justify-content: space-between;
 }
 
+.about-tab {
+  font-size: 1.2rem;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 10px;
+  cursor: pointer;
+  border-right: var(--border-squares); border-image: var(--border-image);
+  text-align: center;
+  width: 100%;
+
+}
+.about-tab:hover {
+  color: var(--color-tx-hover, #0000ff60);
+}
+.about-tab.active {
+  text-decoration: underline;
+}
+
+.about-content {
+  display: grid;
+  margin-top: 0;
+  border-left: var(--border-squares); border-image: var(--border-image);
+  border-bottom: var(--border-squares); border-image: var(--border-image);
+  border-right: var(--border-squares); border-image: var(--border-image);
+}
+
+.about-panel {
+  grid-area: 1 / 1;      /* every panel sits in the same cell */
+  padding: 1rem;
+  visibility: hidden;    /* hidden but still takes up space */
+}
+.about-panel.active {
+  visibility: visible;
+}
 
 /* LIBRARY */
 
@@ -331,10 +360,7 @@ video {
             <!-- ABOUT END -->
             <div class="divider"></div>
 
-<<<<<<< Updated upstream
               
-=======
->>>>>>> Stashed changes
             <div class="channel" id="express"></div>
 
             <!-- EXPRESS IMAGE START-->
@@ -373,7 +399,6 @@ video {
 <script src="js/header-scroll.js"></script>
 <script src="js/fetch-channels.js"></script>
 <script src="js/clock.js"></script>
-<<<<<<< Updated upstream
 <script>
 (() => {
   const tabs = document.querySelectorAll('.about-tab');
@@ -397,6 +422,4 @@ video {
   show(tabs[0].dataset.target); // keeps the JS and HTML defaults in sync
 })();
 </script>
-=======
->>>>>>> Stashed changes
 </html>
