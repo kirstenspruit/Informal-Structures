@@ -118,23 +118,37 @@ video {
 }
 
 .info-section {
-  /* display: none; */
-    padding: 1rem;
-    margin: 4rem 0;   
-}
-.info-section p {
-  max-width: 40em;
+  margin: 1rem;
+  border: var(--border-squares); border-image: var(--border-image);
 }
 
-.info-section ul li::before {
-    display: inline-block;
-    width: 1.5rem;
-    height: 1rem;
-    content: url(squares-s.svg);
+.info-section summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+  list-style: none;                  
 }
-.info-section ul {
-    list-style: none;
-    padding-left: 0;
+.info-section summary::-webkit-details-marker {
+  display: none;                    
+}
+.info-section summary:hover {
+  color: var(--color-tx-hover);
+}
+
+.info-section summary::after {
+  content: '+';
+  font-family: 'Residence';
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.info-section[open] summary::after {
+  content: '−';
+}
+
+.info-section__content {
+  padding: 0 1rem 1rem;
 }
 
 /* =========================================
@@ -354,23 +368,29 @@ video {
           </section>
           <!-- VIDEO END -->
 
-            <section class="info-section">
-              <h2>Section header</h2>
+            <details class="info-section" open>
+              <summary><h3>What is Informal Structures?</h3></summary>
+              <div class="info-section__content">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque at justo augue. Nam a auctor sem. Praesent aliquet magna nulla, sit amet condimentum felis faucibus vitae. Fusce velit tortor, placerat in nisl ac, ullamcorper aliquam turpis. Praesent placerat odio turpis, id finibus augue egestas vel. Nam eget eleifend ligula. Maecenas orci sem, tristique quis nisl quis, bibendum accumsan enim. Sed mattis orci eu urna molestie viverra. Nulla quis ipsum sagittis est tempus convallis. Maecenas venenatis pretium lobortis. Duis porta porttitor libero, vitae mollis orci. Sed pharetra ultrices risus, ac cursus sem. Quisque aliquam et ipsum vitae interdum. In venenatis tortor vel turpis cursus, in iaculis libero vulputate. Praesent non feugiat ipsum. 
+                </p>
+                
+                <ul>
+                  <li>Something</li>
+                  <li>Something</li>
+                  <li>Something</li>
+                </ul>
+              </div>
+              </details>
+
+            <details class="info-section">
+              <summary><h3>Our Stewardship Model</h3></summary>
+              <div class="info-section__content">
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque at justo augue. Nam a auctor sem. Praesent aliquet magna nulla, sit amet condimentum felis faucibus vitae. Fusce velit tortor, placerat in nisl ac, ullamcorper aliquam turpis. Praesent placerat odio turpis, id finibus augue egestas vel. Nam eget eleifend ligula. Maecenas orci sem, tristique quis nisl quis, bibendum accumsan enim. Sed mattis orci eu urna molestie viverra. Nulla quis ipsum sagittis est tempus convallis. Maecenas venenatis pretium lobortis. Duis porta porttitor libero, vitae mollis orci. Sed pharetra ultrices risus, ac cursus sem. Quisque aliquam et ipsum vitae interdum. In venenatis tortor vel turpis cursus, in iaculis libero vulputate. Praesent non feugiat ipsum. 
               </p>
-              <ul>
-                <li>Something</li>
-                <li>Something</li>
-                <li>Something</li>
-              </ul>
-            </section>
-            <section class="info-section">
-              <h2>Section header</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque at justo augue. Nam a auctor sem. Praesent aliquet magna nulla, sit amet condimentum felis faucibus vitae. Fusce velit tortor, placerat in nisl ac, ullamcorper aliquam turpis. Praesent placerat odio turpis, id finibus augue egestas vel. Nam eget eleifend ligula. Maecenas orci sem, tristique quis nisl quis, bibendum accumsan enim. Sed mattis orci eu urna molestie viverra. Nulla quis ipsum sagittis est tempus convallis. Maecenas venenatis pretium lobortis. Duis porta porttitor libero, vitae mollis orci. Sed pharetra ultrices risus, ac cursus sem. Quisque aliquam et ipsum vitae interdum. In venenatis tortor vel turpis cursus, in iaculis libero vulputate. Praesent non feugiat ipsum. 
-              </p>
-            </section>
+              </div>
+            </details>
             <div class="channel" id="express"></div>
               <ul id="express-images" class="list-reset block-type-list"></ul>
             <!-- EXPRESS IMAGE END-->

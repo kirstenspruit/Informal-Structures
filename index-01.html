@@ -270,6 +270,10 @@ video {
 
 .block--channel {
 }
+
+.about {
+
+}
 </style>
 <body>
     <div class="site">
@@ -290,7 +294,22 @@ video {
           <!-- VIDEO END -->
 
           <!-- ABOUT START -->
-            <section class="info-section">
+          <div class="info-section">
+            <h2>About</h2>
+            <div class="about-headers">
+              <button type="button" class="about-tab active" data-target="space" aria-expanded="true" aria-controls="space">Space</button>
+              <button type="button" class="about-tab" data-target="stewardship" aria-expanded="false" aria-controls="stewardship">Stewardship</button>
+              <button type="button" class="about-tab" data-target="hosting" aria-expanded="false" aria-controls="hosting">Hosting</button>
+            </div>
+            <div class="about-content">
+              <section class="about-panel active" id="space"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam in ultrices nunc. Etiam eget ex vehicula, gravida dui sed, bibendum nisl. Ut vitae eros eget nisl lobortis tristique non a neque. Donec mauris dolor, ultrices nec massa ut, commodo egestas nibh. Vivamus elementum nisl nec massa mattis fermentum at varius turpis. Proin et turpis quis lectus dapibus convallis quis eget ligula. Duis eget elit dignissim, maximus ligula eu, eleifend massa. Morbi quis quam venenatis, euismod elit et, varius neque. Interdum et malesuada fames ac ante ipsum primis in faucibus. </p></section>
+              <section class="about-panel" id="stewardship"><p>Pellentesque scelerisque nunc id elit fringilla, vitae pellentesque velit ullamcorper. Mauris a metus ut nisi pretium fermentum. Pellentesque quis ipsum turpis. Quisque eu lobortis erat. Donec vel justo molestie, aliquam dui ullamcorper, condimentum risus. Morbi nec volutpat nulla. In congue orci eros, in accumsan nunc cursus vitae. Curabitur erat sapien, venenatis ut imperdiet quis, cursus ut massa. Vestibulum id eros ut augue lacinia luctus eget id ex. Duis eu massa est. Nulla nec lorem vestibulum dolor malesuada gravida. Nulla a lectus dolor. Sed quis odio facilisis, laoreet tortor non, fringilla velit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p></section>
+              <section class="about-panel" id="hosting"><p>Donec vitae leo ut orci accumsan sodales sit amet at lectus. Vestibulum scelerisque posuere lobortis. Aliquam bibendum interdum tortor sit amet fringilla. Curabitur suscipit tincidunt fringilla. Vestibulum tempus leo quis magna luctus tempor. Sed id libero aliquam, dapibus nunc ac, efficitur neque. Suspendisse ante erat, varius et imperdiet in, tempor ac lorem. </p></section>
+            </div>
+          </div>
+
+
+            <!-- <section class="info-section">
               <h2>Section header</h2>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque at justo augue. Nam a auctor sem. Praesent aliquet magna nulla, sit amet condimentum felis faucibus vitae. Fusce velit tortor, placerat in nisl ac, ullamcorper aliquam turpis. Praesent placerat odio turpis, id finibus augue egestas vel. Nam eget eleifend ligula. Maecenas orci sem, tristique quis nisl quis, bibendum accumsan enim. Sed mattis orci eu urna molestie viverra. Nulla quis ipsum sagittis est tempus convallis. Maecenas venenatis pretium lobortis. Duis porta porttitor libero, vitae mollis orci. Sed pharetra ultrices risus, ac cursus sem. Quisque aliquam et ipsum vitae interdum. In venenatis tortor vel turpis cursus, in iaculis libero vulputate. Praesent non feugiat ipsum. 
@@ -308,10 +327,14 @@ video {
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque at justo augue. Nam a auctor sem. Praesent aliquet magna nulla, sit amet condimentum felis faucibus vitae. Fusce velit tortor, placerat in nisl ac, ullamcorper aliquam turpis. Praesent placerat odio turpis, id finibus augue egestas vel. Nam eget eleifend ligula. Maecenas orci sem, tristique quis nisl quis, bibendum accumsan enim. Sed mattis orci eu urna molestie viverra. Nulla quis ipsum sagittis est tempus convallis. Maecenas venenatis pretium lobortis. Duis porta porttitor libero, vitae mollis orci. Sed pharetra ultrices risus, ac cursus sem. Quisque aliquam et ipsum vitae interdum. In venenatis tortor vel turpis cursus, in iaculis libero vulputate. Praesent non feugiat ipsum. 
               </p>
-            </section>
+            </section> -->
             <!-- ABOUT END -->
             <div class="divider"></div>
 
+<<<<<<< Updated upstream
+=======
+              
+>>>>>>> Stashed changes
             <div class="channel" id="express"></div>
 
             <!-- EXPRESS IMAGE START-->
@@ -349,5 +372,31 @@ video {
 </body>
 <script src="js/header-scroll.js"></script>
 <script src="js/fetch-channels.js"></script>
+<<<<<<< Updated upstream
 <script src="js/clock.js"></script>
+=======
+<script>
+(() => {
+  const tabs = document.querySelectorAll('.about-tab');
+  const panels = document.querySelectorAll('.about-panel');
+
+  function show(id) {
+    tabs.forEach(tab => {
+      const active = tab.dataset.target === id;
+      tab.classList.toggle('active', active);
+      tab.setAttribute('aria-expanded', active);
+    });
+    panels.forEach(panel => {
+      panel.classList.toggle('active', panel.id === id);
+    });
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => show(tab.dataset.target));
+  });
+
+  show(tabs[0].dataset.target); // keeps the JS and HTML defaults in sync
+})();
+</script>
+>>>>>>> Stashed changes
 </html>
