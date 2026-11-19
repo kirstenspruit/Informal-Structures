@@ -189,7 +189,6 @@ video {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(8, minmax(0, 1fr));
-  /* overflow-x: auto; */
   gap: 1rem;
   padding: 1rem;
 }
@@ -206,9 +205,76 @@ video {
   border-image: var(--border-image);
   aspect-ratio: 1 / 1;
   object-fit: cover;
+  cursor: zoom-in;
 }
 
 #images .block__meta {
+  display: none;
+}
+
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: #f1f1f199;
+  cursor: zoom-out;
+}
+.lightbox.open {
+  display: flex;
+}
+.lightbox img {
+  width: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border: var(--border-squares);
+  border-image: var(--border-image);
+}
+.lightbox__figure {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+}
+.lightbox__figure img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: calc(100vw - 4rem);
+  max-height: calc(100vh - 4rem);
+  border: var(--border-squares);
+  border-image: var(--border-image);
+}
+
+.lightbox__caption {
+  position: absolute;
+  left: 3px;   /* matches the 3px border so the squares stay visible */
+  right: 3px;
+  bottom: 3px;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--color-lightgrey);
+  border-top: var(--border);
+}
+.lightbox__caption:empty,
+.lightbox__caption.empty {
+  display: none;
+}
+.lightbox__title {
+  font-size: 1rem;
+}
+.lightbox__description {
+  font-size: 0.8rem;
+  white-space: pre-line; /* keeps line breaks from are.na descriptions */
+}
+.lightbox__date {
+  margin-top: 0.25rem;
+}
+.lightbox__title:empty,
+.lightbox__description:empty,
+.lightbox__date:empty {
   display: none;
 }
 
@@ -373,6 +439,16 @@ video {
               <ul id="files" class="list-reset block-type-list"></ul>
               <ul id="channels" class="list-reset block-type-list"></ul>
         </main>
+        <div class="lightbox" id="lightbox">
+          <figure class="lightbox__figure">
+            <img src="" alt="">
+            <figcaption class="lightbox__caption">
+              <h2 class="lightbox__title"></h2>
+              <p class="lightbox__description"></p>
+              <p class="lightbox__date POI"></p>
+            </figcaption>
+          </figure>
+        </div>
         <div class="cover">
           <img src="cover_06.png">
         </div>
@@ -480,6 +556,12 @@ fetchChannel('express-he8jz5c1ljw')
           </figure>
         `;
 
+        const img = li.querySelector('img');
+        img.dataset.title = block.title || '';
+        img.dataset.description = block.description || '';
+        img.dataset.date = formatDate(block.connected_at);
+        img.dataset.large = block.image?.original?.url || '';
+
       } else if (block.class === 'Text') {
         li.innerHTML = `
           <article class="block__inner">
@@ -551,6 +633,41 @@ fetchChannel('express-he8jz5c1ljw')
   .catch(err => {
     document.getElementById('channel').textContent = 'Failed to load channel.';
     console.error(err);
+  });
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = lightbox.querySelector('img');
+  const lbCaption = lightbox.querySelector('.lightbox__caption');
+  const lbTitle = lightbox.querySelector('.lightbox__title');
+  const lbDescription = lightbox.querySelector('.lightbox__description');
+  const lbDate = lightbox.querySelector('.lightbox__date');
+
+  document.getElementById('images').addEventListener('click', e => {
+    const img = e.target.closest('img');
+    if (!img) return;
+
+    lightboxImg.src = img.dataset.large || img.src;
+    lightboxImg.alt = img.alt;
+
+    lbTitle.textContent = img.dataset.title;
+    lbDescription.textContent = img.dataset.description;
+    lbDate.textContent = img.dataset.date;
+    lbCaption.classList.toggle(
+      'empty',
+      !img.dataset.title && !img.dataset.description
+    );
+
+    lightbox.classList.add('open');
+  });
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightboxImg.src = '';
+  }
+
+  lightbox.addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
   });
 </script>
 </html>
