@@ -56,7 +56,7 @@
 
 .header__site-logo {
   width: 100%;
-  max-width: 1200px;
+  max-width: 80vw;
   transition: all 0.5s;
 }
 
