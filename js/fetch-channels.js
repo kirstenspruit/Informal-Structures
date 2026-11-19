@@ -240,4 +240,4 @@ loadChannel('express-he8jz5c1ljw', document.getElementById('express'), {
 // Channels 2 and 3: one plain list each (no videos are sorted out here,
 // but any that appear still lazy-load only if you pass a Video container)
 loadChannel('physical-library-yihx42lv2nw', document.getElementById('library'));
-loadChannel('third-channel-slug', document.getElementById('bulletin'));
+loadChannel('informal-structures-bulletin-test', document.getElementById('bulletin'));
