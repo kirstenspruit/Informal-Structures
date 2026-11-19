@@ -63,7 +63,7 @@ function formatDate(dateStr) {
             <figcaption class="block__caption">
             ${block.title ? `<h2 class="block__title">${block.title}</h2>` : ''}
             </figcaption>` : ''}
-        <div class="block__meta POI">${blockMeta(block)}</div>
+        // <div class="block__meta POI">${blockMeta(block)}</div>
         </figure>
     `;
     } else if (block.class === 'Text') {
