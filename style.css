@@ -32,6 +32,13 @@
     --border-image: url(squares_2.svg) 24 round;
 }
 
+.divider {
+  background-image: url(squares_2.svg);
+  background-repeat: repeat;
+  background-size: 18px;
+  height: 120px;
+}
+
 
 /* HEADER */
 .header {
