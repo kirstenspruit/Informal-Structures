@@ -82,8 +82,8 @@ video {
 }
 
 .site-logo {
-  width: 200px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 1200px;
 }
 
 /* || LAYOUT */
@@ -101,15 +101,21 @@ video {
 .cover img {
   object-fit: contain;
 }
+
+/* HEADER */
 .header {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: sticky;
-  padding: 1rem;
   top: 0;
   z-index: 2;
-  /* mix-blend-mode: exclusion; */
-  border-top: var(--border-squares);
-  border-image: var(--border-image);
+  mix-blend-mode: difference;
+  filter: grayscale(1);
 }
+/* --- */
 
 .info-section {
     padding: 1rem;
@@ -313,13 +319,10 @@ video {
     <div class="site">
 
       <!-- HEADER START -->
-        <div class="cover">
-          <img src="cover_06.png">
-        </div>
         <header class="header">
             <h1 class="hidden">Informal Structures</h1>
             <div class="site-logo">
-                <img src="logos/logo-5D5D5D.png">
+              <img src="logos/wordmark_light.svg">
             </div>
         </header>
 
@@ -328,7 +331,6 @@ video {
           <!-- VIDEO START-->
           <ul id="videos" class="list-reset block-type-list">
               <div class="videos__frame">
-                <img src="space-frame.png">
               </div>
             </ul>
           <!-- VIDEO END -->
