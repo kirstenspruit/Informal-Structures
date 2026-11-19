@@ -64,3 +64,17 @@
   max-width: 12rem;
 }
 /* --- */
+
+
+/* LIBRARY */
+
+#library .channel__blocks {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}
+
+#library img {
+  width: 100%;
+}
+
+/* --- */
