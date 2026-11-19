@@ -154,7 +154,7 @@ video {
 
 }
 
-#images {
+#express-images {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: scroll;
@@ -164,20 +164,20 @@ video {
   height: 750px;
 }
 
-#images .block {
+#express-images .block {
   white-space: nowrap;
 }
-#images figure {
+#express-images figure {
   height: 100%;
   width: auto;
   /* aspect-ratio: 1 / 1; */
 }
-#images img {
+#express-images img {
   /* border: 3px dotted var(--color-darkgrey); */
   border: var(--border-squares);
   border-image: var(--border-image);
 }
-#videos {
+#express-videos {
     /* position: absolute;
     top: 0;
     left: 0; */
@@ -187,14 +187,14 @@ video {
     flex-wrap: nowrap;
     overflow-x: scroll;
 }
-#videos .block {
+#express-videos .block {
     white-space: nowrap;
     /* width: 500px; */
     height: 100%;
     background-color: var(--color-darkgrey);
 }
 
-#videos video {
+#express-videos video {
   display: block;
   height: 100vh;
   /* border-right: 3px dotted var(--color-lightgrey); */
@@ -202,7 +202,7 @@ video {
   border-image: var(--border-image);
 }
 
-#videos .block__meta {
+#express-videos .block__meta {
   display: none;
 }
 .videos__frame {
@@ -220,8 +220,8 @@ video {
   height: 100vh;
 }
 
-#videos .block__title,
-#images .block__title{
+#express-videos .block__title,
+#express-images .block__title{
   display: none;
 }
 
@@ -312,7 +312,7 @@ video {
       <!-- HEADER END -->
         <main>
           <!-- VIDEO START-->
-          <ul id="videos" class="list-reset block-type-list">
+          <ul id="express-videos" class="list-reset block-type-list">
             <div class="videos__frame">
             </div>
           </ul>
@@ -343,7 +343,7 @@ video {
 
             <!-- EXPRESS IMAGE START-->
             <div class="channel" id="express"></div>
-              <ul id="images" class="list-reset block-type-list"></ul>
+              <ul id="express-images" class="list-reset block-type-list"></ul>
             <!-- EXPRESS IMAGE END-->
               <!-- <div class="divider"></div>
               <ul id="texts" class="list-reset block-type-list"></ul>

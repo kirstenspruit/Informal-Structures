@@ -45,6 +45,7 @@
   padding: 0 1rem;
   padding-top: 40vh;
   transition: all 0.5s;
+  pointer-events: none;
 }
 .header--small {
   padding-top: 1rem;
@@ -75,6 +76,10 @@
 
 #library img {
   width: 100%;
+}
+
+#library .block__title {
+  display: none;
 }
 
 /* --- */

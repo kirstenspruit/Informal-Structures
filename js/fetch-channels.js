@@ -32,6 +32,15 @@ async function fetchChannel(slug, per = 100) {
 const esc = (s) =>
     String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
 
+const shuffle = (arr) => {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+};
+
 function formatDate(dateStr) {
     const d = new Date(dateStr);
     if (isNaN(d)) return '';
@@ -65,7 +74,7 @@ ${block.description?.html ? `<div class="block__description">${block.description
     } else if (block.type === 'Image') {
         li.innerHTML = `
 <figure class="block__inner">
-<img class="block__image" src="${esc(block.image?.medium?.src || block.image?.src)}" alt="${esc(block.image?.alt_text || block.title || '')}">
+<img class="block__image" loading="lazy" decoding="async" src="${esc(block.image?.medium?.src || block.image?.src)}" alt="${esc(block.image?.alt_text || block.title || '')}">
 ${block.title ? `<figcaption class="block__caption"><h2 class="block__title">${esc(block.title)}</h2></figcaption>` : ''}
 <div class="block__meta POI">${blockMeta(block)}</div>
 </figure>`;
@@ -78,7 +87,7 @@ ${block.title ? `<h2 class="block__title">${esc(block.title)}</h2>` : ''}
 <div class="block__meta POI">${blockMeta(block)}</div>
 </article>`;
 
-    } else if (block.type === 'Embed') { 
+    } else if (block.type === 'Embed') {
         li.innerHTML = `
 <figure class="block__inner">
 ${block.title ? `<h2 class="block__title">${esc(block.title)}</h2>` : ''}
@@ -96,11 +105,13 @@ ${block.title ? `<h2 class="block__title">${esc(block.title)}</h2>` : ''}
         const title = block.title || file.filename || 'Untitled';
         key = isVideo ? 'Video' : isAudio ? 'Audio' : 'Attachment';
 
+        // Videos get no src here: the URL lives in data-src and is
+        // assigned by lazyVideos() when the video scrolls near the viewport.
         li.innerHTML = `
 <figure class="block__inner">
-${isVideo ? `<video autoplay muted loop preload="metadata" ${thumb ? `poster="${esc(thumb)}"` : ''} class="block__video"><source src="${esc(fileUrl)}" type="${esc(mime)}"></video>` : ''}
+${isVideo ? `<video muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none" data-src="${esc(fileUrl)}" ${thumb ? `poster="${esc(thumb)}"` : ''} class="block__video"></video>` : ''}
 ${isAudio ? `<audio controls preload="none"><source src="${esc(fileUrl)}" type="${esc(mime)}"></audio>` : ''}
-${!isVideo && thumb ? `<img class="block__image" src="${esc(thumb)}" alt="${esc(title)}">` : ''}
+${!isVideo && thumb ? `<img class="block__image" loading="lazy" decoding="async" src="${esc(thumb)}" alt="${esc(title)}">` : ''}
 <figcaption class="block__caption">
     <h2 class="block__title"><a class="block__link" href="${esc(fileUrl || '#')}">${esc(title)}</a></h2>
 </figcaption>
@@ -122,8 +133,68 @@ ${!isVideo && thumb ? `<img class="block__image" src="${esc(thumb)}" alt="${esc(
     return {li, key};
 }
 
+// Autoplay rules: a video may autoplay without a user gesture only if it is
+// muted and (on iOS) plays inline. Set these as PROPERTIES as well as
+// attributes: the `muted` attribute alone is unreliable on elements created
+// through innerHTML, and iOS Safari then refuses to autoplay.
+function prepareVideo(v) {
+    v.muted = true;
+    v.defaultMuted = true;
+    v.playsInline = true;
+    v.setAttribute('playsinline', '');
+    v.setAttribute('webkit-playsinline', '');
+    v.removeAttribute('controls');
+    v.disablePictureInPicture = true;
+}
+
+const visibleVideos = new Set();
+
+function playVideo(v) {
+    // Must be muted before every play() call
+    v.muted = true;
+    const p = v.play();
+    if (p && p.catch) p.catch(() => {});   // blocked: retried on first user gesture
+}
+
+// Some setups block autoplay entirely (iOS Low Power Mode, Safari's "Never
+// Auto-Play", data saver). The first tap/click/key then starts every video
+// that is currently on screen.
+['touchend', 'click', 'keydown'].forEach(evt =>
+    window.addEventListener(evt, () => visibleVideos.forEach(playVideo), {once: true, passive: true})
+);
+
+// Loads a video's source only when it comes near the viewport, plays it
+// while visible and pauses it when it leaves. `scroller` is the horizontally
+// scrolling container (#videos), used as the observer root.
+function lazyVideos(scroller) {
+    if (!scroller) return;
+    const videos = scroller.querySelectorAll('video[data-src]');
+    if (!videos.length) return;
+
+    videos.forEach(prepareVideo);
+
+    const io = new IntersectionObserver(entries => {
+        entries.forEach(({target: v, isIntersecting}) => {
+            if (isIntersecting) {
+                visibleVideos.add(v);
+                if (!v.src) v.src = v.dataset.src;   // first load only
+                playVideo(v);
+            } else {
+                visibleVideos.delete(v);
+                v.pause();
+            }
+        });
+    }, {
+        root: scroller,
+        rootMargin: '0px 100% 0px 100%'              // start loading one screen ahead
+    });
+
+    videos.forEach(v => io.observe(v));
+}
+
 // Loads one channel. With `containers`, blocks are sorted by type; otherwise one plain list.
-async function loadChannel(slug, mainEl, containers = null) {
+// Options: maxVideos = how many (randomly chosen) videos to show.
+async function loadChannel(slug, mainEl, containers = null, {maxVideos = Infinity} = {}) {
     try {
         const channel = await fetchChannel(slug);
         const description = channel.description?.plain;
@@ -140,29 +211,33 @@ ${description ? `<div class="channel__description"></div>` : ''}
 
         const list = mainEl.querySelector('.channel__blocks');
 
-        channel.contents.forEach(block => {
-            const rendered = renderBlock(block);
-            if (!rendered) return;
-            (containers?.[rendered.key] || list).appendChild(rendered.li);
-        });
+        // Render everything, then keep only `maxVideos` random videos
+        const rendered = channel.contents.map(renderBlock).filter(Boolean);
+        const videos = shuffle(rendered.filter(r => r.key === 'Video')).slice(0, maxVideos);
+        const items = rendered.filter(r => r.key !== 'Video').concat(videos);
+
+        items.forEach(({li, key}) => (containers?.[key] || list).appendChild(li));
+
+        lazyVideos(containers?.Video);
     } catch (err) {
         mainEl.textContent = 'Failed to load channel.';
         console.error(err);
     }
 }
 
-// Channel 1: sorted by type
+// Channel 1: sorted by type, three random videos
 loadChannel('express-he8jz5c1ljw', document.getElementById('express'), {
-    Image: document.getElementById('images'),
-    Text: document.getElementById('texts'),
-    Link: document.getElementById('links'),
-    Embed: document.getElementById('media'),
-    Attachment: document.getElementById('files'),
-    Audio: document.getElementById('audio'),
-    Video: document.getElementById('videos'),
-    Channel: document.getElementById('channels'),
-});
+    Image: document.getElementById('express-images'),
+    Text: document.getElementById('express-texts'),
+    Link: document.getElementById('express-links'),
+    Embed: document.getElementById('express-media'),
+    Attachment: document.getElementById('express-files'),
+    Audio: document.getElementById('express-audio'),
+    Video: document.getElementById('express-videos'),
+    Channel: document.getElementById('express-channels'),
+}, {maxVideos: 4});
 
-// Channels 2 and 3: one plain list each
+// Channels 2 and 3: one plain list each (no videos are sorted out here,
+// but any that appear still lazy-load only if you pass a Video container)
 loadChannel('physical-library-yihx42lv2nw', document.getElementById('library'));
-loadChannel('third-channel-slug', document.getElementById('bulletin'));   
+loadChannel('third-channel-slug', document.getElementById('bulletin'));
