@@ -33,3 +33,34 @@
 }
 
 
+/* HEADER */
+.header {
+  width: calc(100vw - 2rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  padding: 0 1rem;
+  padding-top: 40vh;
+  transition: all 0.5s;
+}
+.header--small {
+  padding-top: 1rem;
+}
+.header--blend {
+  mix-blend-mode: difference;
+  filter: grayscale(1);
+}
+
+.header__site-logo {
+  width: 100%;
+  max-width: 1200px;
+  transition: all 0.5s;
+}
+
+.header__site-logo--small {
+  max-width: 12rem;
+}
+/* --- */

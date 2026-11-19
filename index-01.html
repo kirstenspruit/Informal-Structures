@@ -81,11 +81,6 @@ video {
     /* height: auto; */
 }
 
-.site-logo {
-  width: 100%;
-  max-width: 1200px;
-}
-
 /* || LAYOUT */
 
 .site {
@@ -102,20 +97,6 @@ video {
   object-fit: contain;
 }
 
-/* HEADER */
-.header {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  mix-blend-mode: difference;
-  filter: grayscale(1);
-}
-/* --- */
 
 .info-section {
     padding: 1rem;
@@ -323,7 +304,7 @@ video {
       <!-- HEADER START -->
         <header class="header">
             <h1 class="hidden">Informal Structures</h1>
-            <div class="site-logo">
+            <div class="header__site-logo">
               <img src="logos/wordmark_light.svg">
             </div>
         </header>
@@ -381,10 +362,11 @@ video {
             <!-- BULLETIN END -->
 
             <!-- LIBRARY START -->
+
             <!-- LIBRARY END -->
         </main>
         <!-- FOOTER START -->
-
+        <div id="library-channel"></div>
         <!-- FOOTER END -->
     </div>
 </body>
@@ -563,4 +545,5 @@ fetchChannel('express-he8jz5c1ljw')
     console.error(err);
   });
 </script>
+<script src="js/header-scroll.js"></script>
 </html>
