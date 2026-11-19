@@ -35,6 +35,10 @@
   scrollbar-width: none;  /* Firefox */
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 /* || TYPOGRAPHY */
 
 html {
@@ -132,6 +136,7 @@ video {
 }
 
 .info-section {
+  display: none;
     padding: 1rem;
     margin: 4rem 0;   
 }
@@ -181,16 +186,16 @@ video {
 
 #images {
   position: relative;
-  width: calc(100vw - 2rem);
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  overflow-x: auto;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  /* overflow-x: auto; */
   gap: 1rem;
   padding: 1rem;
 }
 
 #images .block {
-  width: 100%;
+
 }
 #images figure {
   aspect-ratio: 1 / 1;
@@ -199,6 +204,7 @@ video {
   height: 100%;
 }
 #images img {
+  width: 100%;
   border: var(--border-squares);
   border-image: var(--border-image);
 }
