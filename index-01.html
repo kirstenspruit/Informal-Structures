@@ -180,15 +180,16 @@ video {
   width: calc(100vw - 2rem);
   gap: 2rem;
   padding: 1rem;
+  height: 750px;
 }
 
 #images .block {
   white-space: nowrap;
-  width: 500px;
 }
 #images figure {
-  width: 500px;
-  aspect-ratio: 1 / 1;
+  height: 100%;
+  width: auto;
+  /* aspect-ratio: 1 / 1; */
 }
 #images img {
   /* border: 3px dotted var(--color-darkgrey); */
@@ -283,7 +284,8 @@ video {
 }
 
 .block__image {
-
+  height: 75%;
+  width: auto;
 }
 
 .block__embed {
@@ -428,14 +430,14 @@ fetchChannel('express-he8jz5c1ljw')
 
     function blockMeta(block) {
       const creator = block.user?.full_name || block.user?.username;
-      const connector = block.connected_by_username;
+      //const connector = block.connected_by_username;
       const date = formatDate(block.connected_at);
 
-      const byline = (creator && connector && creator !== connector)
-        ? `${connector} (added block by ${creator})`
-        : (connector || creator || 'Unknown');
+      // const byline = (creator && connector && creator !== connector)
+       //  ? `${connector} (added block by ${creator})`
+        // : (connector || creator || 'Unknown');
 
-      return `<p class="block__meta">${byline} · ${date}</p>`;
+      return `<p class="block__meta"> ${block.title} · ${date} · ${block.description} </p>`;
     }
 
     function formatDate(dateStr) {
