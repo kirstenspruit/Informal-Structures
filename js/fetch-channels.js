@@ -44,13 +44,13 @@ const shuffle = (arr) => {
 function formatDate(dateStr) {
     const d = new Date(dateStr);
     if (isNaN(d)) return '';
-    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
 }
 
 function blockMeta(block) {
     const date = formatDate(block.connection?.connected_at || block.created_at);
     const parts = [block.title, date, block.description?.plain].filter(Boolean);
-    return `<p class="block__meta">${parts.map(esc).join(' · ')}</p>`;
+    return `<p>${parts.map(esc).join(' · ')}</p>`;
 }
 
 // Builds one <li>. Returns { li, key } so the caller decides where it goes.
@@ -240,4 +240,4 @@ loadChannel('express-he8jz5c1ljw', document.getElementById('express'), {
 // Channels 2 and 3: one plain list each (no videos are sorted out here,
 // but any that appear still lazy-load only if you pass a Video container)
 loadChannel('physical-library-yihx42lv2nw', document.getElementById('library'));
-loadChannel('informal-structures-bulletin-test', document.getElementById('bulletin'));
+loadChannel('bulletin-mqhhgdsiy_0', document.getElementById('bulletin'));

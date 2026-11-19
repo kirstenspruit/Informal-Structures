@@ -35,9 +35,6 @@
   scrollbar-width: none;  /* Firefox */
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-}
 
 /* || TYPOGRAPHY */
 
@@ -386,6 +383,14 @@ video {
             </section>
             <!-- BULLETIN END -->
 
+            <!-- LOCAL-DATA START -->
+            <section class="local-date POI">
+              <span>Granada, Spain</span>
+              <span id="local-time"></span>
+              <span id="date"></span>
+            </section>
+            <!-- LOCAL-DATA END -->
+
             <div class="divider"></div>
 
             <!-- LIBRARY START -->
@@ -413,6 +418,7 @@ video {
 </body>
 <script src="js/header-scroll.js"></script>
 <script src="js/fetch-channels.js"></script>
+<script src="js/clock.js"></script>
 <script>
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = lightbox.querySelector('img');
