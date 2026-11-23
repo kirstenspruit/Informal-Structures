@@ -22,6 +22,8 @@
 
     --border-squares: 3px solid transparent;
     --border-image: url(squares_2.svg) 24 round;
+    --border-squares-thick: 10px solid transparent;
+    --border-image-thick: url(squares_2.svg) 32 r
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -84,6 +86,11 @@ h1,h2,h3,h4,h5,h6,p {
     list-style: none;
 }
 
+hr {
+  border-image: var(--border-image);
+  border-top: var(--border-squares);
+
+}
 /* || MEDIA */
 
 figure {
@@ -115,6 +122,10 @@ video {
   border-top: var(--border-squares);
   border-bottom: var(--border-squares);
   border-image: var(--border-image);
+}
+
+section#info {
+  margin: 15rem 0;
 }
 
 .info-section {
@@ -178,6 +189,10 @@ video {
 
 .channel__blocks {
 
+}
+
+#express-section {
+  padding-bottom: 10rem;
 }
 
 #express-images {
@@ -286,6 +301,10 @@ video {
   display: none;
 }
 
+#library {
+  padding-bottom: 10rem;
+}
+
 #library .channel__blocks {
   display: flex;
   flex-wrap: nowrap;
@@ -337,6 +356,20 @@ video {
 #library .block__meta {
   height: 0;
   visibility: hidden;
+}
+
+#footer {
+  border: var(--border-squares);
+  border-image: var(--border-image);
+}
+.footer-section {
+  text-align: center;
+  margin: 4rem 0;
+}
+.footer-section p {
+  margin: 25px auto;
+  width: 60Vw;
+  max-width: 660px;
 }
 
 /* =========================================
@@ -420,7 +453,7 @@ video {
           <section id="express-videos">
           </section>
           <!-- VIDEO END -->
-
+          <section id="info">
             <details class="info-section" open>
               <summary><h3>What is Informal Structures?</h3></summary>
               <div class="info-section__content">
@@ -444,8 +477,20 @@ video {
               </p>
               </div>
             </details>
-            <div class="channel" id="express"></div>
+
+              <details class="info-section">
+              <summary><h3>Hosting</h3></summary>
+              <div class="info-section__content">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque at justo augue. Nam a auctor sem. Praesent aliquet magna nulla, sit amet condimentum felis faucibus vitae. Fusce velit tortor, placerat in nisl ac, ullamcorper aliquam turpis. Praesent placerat odio turpis, id finibus augue egestas vel. Nam eget eleifend ligula. Maecenas orci sem, tristique quis nisl quis, bibendum accumsan enim. Sed mattis orci eu urna molestie viverra. Nulla quis ipsum sagittis est tempus convallis. Maecenas venenatis pretium lobortis. Duis porta porttitor libero, vitae mollis orci. Sed pharetra ultrices risus, ac cursus sem. Quisque aliquam et ipsum vitae interdum. In venenatis tortor vel turpis cursus, in iaculis libero vulputate. Praesent non feugiat ipsum. 
+              </p>
+              </div>
+            </details>
+          </section>
+            <section id="express-section">
+              <div class="channel" id="express"></div>
               <ul id="express-images" class="list-reset block-type-list"></ul>
+            </section>
             <!-- EXPRESS IMAGE END-->
 
             <div class="divider"></div>
@@ -468,15 +513,29 @@ video {
 
             <!-- LIBRARY START -->
             <section class="channel" id="library">
-
             </section>
             <!-- LIBRARY END -->
         </main>
+        <div class="divider"></div>
         <!-- FOOTER START -->
-        
+         <section id="footer">
+          <div class="footer-section">
+            <p>Informal Structures<br> a peer-to-peer third space exploring the dynamic relationship between analogue and digital practices, rooted in Granada, Spain.</p>
+            <hr>
+            <p>Stewarded by<br> Kita Rancaño Ward & Tommy Mattison</p>
+            <hr>
+            <p>Contact<br> <a href="mailto:informalstructures@gmail.com">informalstructures@gmail.com</a></p>
+            <hr>  
+            <p>Website Coded-in-Situ by<br> Kirsten Spruit & Benjamin Earl</p>
+            <hr>
+            <p>Typefaces<br> Times Now + Residence</p>
+          </div>
+          
+         </section>
+         <div class="divider"></div>
         <!-- FOOTER END -->
 
-
+         <!-- LIGHTBOX START -->
         <div class="lightbox" id="lightbox">
           <figure class="lightbox__figure">
             <img src="" alt="">
@@ -487,6 +546,7 @@ video {
             </figcaption>
           </figure>
         </div>
+        <!-- LIGHTBOX END -->
     </div>
 </body>
 <script src="js/header-scroll.js"></script>
