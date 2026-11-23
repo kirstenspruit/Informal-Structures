@@ -14,16 +14,16 @@
 
     --color-tx: var(--color-darkgrey);
     --color-tx-highlighted: var(--color-darkgrey);
-    --color-tx-hover: #0000ff60;
+    --color-tx-hover: #919191;
     --color-bg: var(--color-darkgrey);
     --color-bg-light: var(--color-lightgrey);
 
     --border: 1px solid var(--color-darkgrey);
 
-    --border-squares: 3px solid transparent;
+    --border-squares: 4px solid transparent;
     --border-image: url(squares_2.svg) 24 round;
     --border-squares-thick: 10px solid transparent;
-    --border-image-thick: url(squares_2.svg) 32 r
+    --border-image-thick: url(squares_2.svg) 32 round;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -40,10 +40,6 @@
 
 /* || TYPOGRAPHY */
 
-html {
-    font-size: 20px;
-    scroll-behavior: smooth;
-}
 
 body {
     font-family: 'Times Now', 'Times New Roman', Times, serif;
@@ -125,8 +121,9 @@ video {
 }
 
 section#info {
-  margin: 15rem 0;
+  padding: 15rem 0;
 }
+
 
 .info-section {
   margin: 1rem;
@@ -162,6 +159,21 @@ section#info {
   padding: 0 1rem 1rem;
 }
 
+.info-section__content {
+  max-width: 50rem;
+}
+
+.info-section ul li::before {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1rem;
+    content: url(squares-s.svg);
+}
+.info-section ul {
+    list-style: none;
+    padding-left: 0;
+}
+
 /* =========================================
    CHANNEL
    ========================================= */
@@ -176,7 +188,7 @@ section#info {
     z-index: 2; */
     /* display: none; */
     padding: 1rem;
-    border-top: var(--border-squares);
+    /* border-top: var(--border-squares); */
     border-image: var(--border-image);
 }
 
@@ -197,11 +209,13 @@ section#info {
 
 #express-images {
   position: relative;
-  width: 100%;
+  width: calc(100% - 2rem);
   display: grid;
   grid-template-columns: repeat(8, minmax(0, 1fr));
-  gap: 1rem;
-  padding: 1rem;
+  gap: 6px;
+  margin: 1rem;
+  /* border: var(--border-squares); */
+  border-image: var(--border-image);
 }
 
 #express-images .block {
@@ -217,6 +231,7 @@ section#info {
   aspect-ratio: 1 / 1;
   object-fit: cover;
   cursor: zoom-in;
+  display: block;
 }
 
 #express-images .block__meta {
@@ -309,7 +324,7 @@ section#info {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: scroll;
-  width: calc(100vw - 2rem);
+  width: calc(100vw);
   gap: 2rem;
   padding: 1rem;
   align-items: end;
@@ -339,6 +354,7 @@ section#info {
   margin: 1rem auto 2rem;
   padding: 0.5rem 1.5rem;
   font: inherit;
+  font-size: 0.8rem;
   font-family: 'Editor';
   text-transform: uppercase;
   color: inherit;
@@ -435,17 +451,125 @@ section#info {
 }
 
 .block--channel {
+
 }
+
+/* NEW HEADER */
+
+#express-videos {
+
+}
+
+main {
+  background-color: var(--color-lightgrey);
+}
+footer {
+  background-color: var(--color-lightgrey);
+}
+
+.header-space {
+  height: 200px;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 2.5rem;
+  z-index: 2;
+  padding: 0 1rem;
+  margin-bottom: 200px;
+  transition: all 0.5s;
+  pointer-events: none;
+
+}
+.header--small {
+  padding-top: 1rem;
+}
+.header {
+  mix-blend-mode: difference;
+  filter: grayscale(1);
+}
+
+.header__site-logo {
+  width: 100%;
+  max-width: 1000px;
+  transition: all 0.5s;
+}
+
+.header__site-logo--small {
+  max-width: 12rem;
+}
+
+.extra-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  padding: 0 1rem 0.5rem 1rem;
+  mix-blend-mode: difference;
+  filter: grayscale(1);
+  color: white;
+  position: sticky;
+  top: 1rem;
+}
+
+.tagline {
+  display: flex;
+  width: calc(100vw - 2rem);
+  justify-content: center;
+  align-items: end;
+  overflow: hidden;
+  transition: all 0.5s;
+  position: absolute;
+  left: 1rem;
+}
+.tagline--closed {
+  width: 0;
+}
+.granada {
+  /* flex-shrink: 0; */
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: all 0.5s;
+}
+.local-data {
+  display: flex;
+  flex: 1;
+  gap: 0.5rem;
+  overflow: hidden;
+  transition: all 0.5s;
+  justify-content: end;
+}
+.closed {
+  opacity: 0;
+}
+
 </style>
 <body>
     <div class="site">
         <!-- HEADER START -->
+        <div class="header-space"></div>
         <header class="header">
             <h1 class="hidden">Informal Structures</h1>
             <div class="header__site-logo">
               <img src="logos/wordmark_light.svg">
             </div>
         </header>
+        <div class="extra-header">
+          <div class="tagline">
+            An experimental art space exploring the dynamic relationship between analogue and digital practices
+          </div>
+          <div class="POI granada closed">
+            Granada, Spain
+          </div>
+          <div class="POI local-data closed">
+            <span id="local-time" class="local-data__item"></span> <span id="date" class="local-data__item"></span>
+          </div>
+        </div>
 
       <!-- HEADER END -->
         <main>
@@ -501,14 +625,6 @@ section#info {
             </section>
             <!-- BULLETIN END -->
 
-            <!-- LOCAL-DATA START -->
-            <section class="local-date POI">
-              <span>Granada, Spain</span>
-              <span id="local-time"></span>
-              <span id="date"></span>
-            </section>
-            <!-- LOCAL-DATA END -->
-
             <div class="divider"></div>
 
             <!-- LIBRARY START -->
@@ -518,7 +634,7 @@ section#info {
         </main>
         <div class="divider"></div>
         <!-- FOOTER START -->
-         <section id="footer">
+         <footer id="footer">
           <div class="footer-section">
             <p>Informal Structures<br> a peer-to-peer third space exploring the dynamic relationship between analogue and digital practices, rooted in Granada, Spain.</p>
             <hr>
@@ -531,7 +647,7 @@ section#info {
             <p>Typefaces<br> Times Now + Residence</p>
           </div>
           
-         </section>
+        </footer>
          <div class="divider"></div>
         <!-- FOOTER END -->
 
@@ -549,7 +665,7 @@ section#info {
         <!-- LIGHTBOX END -->
     </div>
 </body>
-<script src="js/header-scroll.js"></script>
+<script src="js/header-scroll2.js"></script>
 <!-- <script src="js/fetch-channels.js"></script> -->
 <script src="js/clock.js"></script>
 <script>
@@ -826,7 +942,7 @@ loadChannel('express-he8jz5c1ljw', document.getElementById('express'), {
     Audio: document.getElementById('express-audio'),
     Video: document.getElementById('express-videos'),
     Channel: document.getElementById('express-channels'),
-}, {maxVideos: 4, imagePageSize: 20 });
+}, {maxVideos: 4, imagePageSize: 24 });
 
 // Channels 2 and 3: one plain list each (no videos are sorted out here,
 // but any that appear still lazy-load only if you pass a Video container)

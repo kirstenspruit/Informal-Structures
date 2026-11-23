@@ -21,10 +21,6 @@
 
 /* || TYPOGRAPHY */
 
-html {
-    font-size: 20px;
-    scroll-behavior: smooth;
-}
 
 body {
     font-family: 'Times Now', 'Times New Roman', Times, serif;
@@ -108,14 +104,20 @@ video {
   border-right: var(--border-squares); 
   border-left: var(--border-squares); 
   border-image: var(--border-image);
-  padding: 10rem 2rem;
+  padding: 10rem 1rem;
+}
+
+.main-about__gallery {
+  display: flex;
+  gap: 1rem;
+  padding-top: 10rem;
 }
 
 
 .about-headers {
   display: flex;
   /* gap: 1.5rem; */
-  border: var(--border-squares); border-image: var(--border-image);
+  /* border: var(--border-squares); border-image: var(--border-image); */
   justify-content: space-between;
 }
 
@@ -124,9 +126,10 @@ video {
   color: inherit;
   background: none;
   border: 0;
-  padding: 20px;
+  padding: 1rem;
   cursor: pointer;
-  border-right: var(--border-squares); border-image: var(--border-image);
+  border: var(--border-squares); border-image: var(--border-image);
+  border-right: none;
   text-align: center;
   width: 100%;
 }
@@ -136,9 +139,11 @@ video {
 }
 .about-tab.active {
   text-decoration: underline;
+  border-bottom: none;
+  padding-bottom: calc(1rem + 6px);
 }
 .about-tab:last-child {
-  border-right: none;
+  border-right: var(--border-squares); border-image: var(--border-image);
 }
 
 .about-content {
@@ -151,11 +156,16 @@ video {
 
 .about-panel {
   grid-area: 1 / 1;      /* every panel sits in the same cell */
-  padding: 2rem  2rem 5rem 2rem;
+  padding: 2rem  1rem 5rem 1rem;
   visibility: hidden;    /* hidden but still takes up space */
 }
 .about-panel.active {
   visibility: visible;
+}
+.main-about p,
+.about-panel p {
+  max-width: 50rem;
+  margin: 1rem auto;
 }
 
 /* LIBRARY */
@@ -183,6 +193,7 @@ video {
   margin: 1rem auto 2rem;
   padding: 0.5rem 1.5rem;
   font: inherit;
+  font-size: 0.8rem;
   font-family: 'Editor';
   text-transform: uppercase;
   color: inherit;
@@ -197,6 +208,26 @@ video {
 .load-more[hidden] {
   display: none;
 }
+
+/* LOCAL-DATA */
+
+.local-date {
+  display: flex;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.local-data__item {
+  flex: 1;
+}
+#local-time {
+  text-align: center;
+}
+#date {
+  text-align: right;
+}
+
+/* --- */
 
 
 /* =========================================
@@ -369,6 +400,11 @@ video {
           <div class="info-section">
             <div class="main-about">
               <p>A peer-to-peer third space exploring the dynamic relationship between analogue and digital practices. Open to practitioners across disciplines, INFORMAL STRUCTURES welcomes those working at the convergence of craft, technology, ecology and futurist thinking. Grounded in ecological frameworks that acknowledge interconnection and adaptive systems, the studio seeks to reveal the emergent possibilities that arise when seemingly divergent approaches converge.</p>
+              <figure class="main-about__gallery">
+                <img src="images/image1.webp" alt="" class="main-about__image">
+                <img src="images/image2.webp" alt="" class="main-about__image">
+                <img src="images/image3.png" alt="" class="main-about__image">
+              </figure>
             </div>
             <div class="about-headers">
               <button type="button" class="about-tab active" data-target="space" aria-expanded="true" aria-controls="space">Space</button>
@@ -422,9 +458,9 @@ video {
 
             <!-- LOCAL-DATA START -->
             <section class="local-date POI">
-              <span>Granada, Spain</span>
-              <span id="local-time"></span>
-              <span id="date"></span>
+              <div class="local-data__item">Granada, Spain</div>
+              <div id="local-time" class="local-data__item"></div>
+              <div id="date" class="local-data__item"></div>
             </section>
             <!-- LOCAL-DATA END -->
              

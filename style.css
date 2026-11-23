@@ -36,11 +36,27 @@
   box-sizing: border-box;
 }
 
+html {
+    font-size: 20px;
+    scroll-behavior: smooth;
+}
+@media only screen and (max-width: 600px) {
+  html {
+      font-size: 16px;
+  }
+}
+
 .divider {
   background-image: url(squares_2.svg);
   background-repeat: repeat;
   background-size: 18px;
   height: 120px;
+}
+
+hr {
+  border-image: var(--border-image);
+  border-top: var(--border-squares);
+
 }
 
 /* HEADER */
@@ -87,7 +103,7 @@
 /* EXPRESS-VIDEO */
 
 #express-videos {
-  height: calc(100vh - 12px);
+  height: calc(100vh);
   width: 100vw;
   display: flex;
   flex-wrap: nowrap;
@@ -159,12 +175,3 @@
 
 /* --- */
 
-/* LOCAL-DATA */
-
-.local-date {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem;
-}
-
-/* --- */
